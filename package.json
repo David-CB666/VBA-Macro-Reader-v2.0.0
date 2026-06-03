@@ -1,0 +1,37 @@
+{
+  "name": "vba-reader",
+  "version": "2.0.0",
+  "description": "VBA Macro Reader & Operator - Read, modify, and execute VBA macro code",
+  "author": "[姓名]",
+  "license": "MIT",
+  "keywords": [
+    "vba",
+    "excel",
+    "macro",
+    "automation",
+    "win32com",
+    "oletools"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/David-CB666/push.git"
+  },
+  "engines": {
+    "python": ">=3.8"
+  },
+  "dependencies": {
+    "pywin32": ">=300",
+    "oletools": ">=0.60"
+  },
+  "files": [
+    "SKILL.md",
+    "README.md",
+    "scripts/",
+    "examples/",
+    "tests/"
+  ],
+  "main": "scripts/vba_reader.py",
+  "scripts": {
+    "test": "python tests/test_reader.py"
+  }
+}

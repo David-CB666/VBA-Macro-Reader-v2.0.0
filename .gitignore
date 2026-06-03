@@ -1,0 +1,19 @@
+# Python bytecode
+__pycache__/
+*.pyc
+
+# Environment & secrets
+.env
+
+# Logs
+*.log
+
+# Temporary / session files
+temp/
+sessions/
+
+# Private / internal
+_*/
+
+# macOS
+.DS_Store
