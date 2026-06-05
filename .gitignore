@@ -17,3 +17,12 @@ _*/
 
 # macOS
 .DS_Store
+
+# 備份
+.backup_*/
+
+# 獨立子倉庫（各有自己的 .git，不在此 repo 追蹤）
+VBA-Macro-Reader-v2.0.0/
+msp-automation/
+excel-template-filler/
+gantt-chart-pro/
