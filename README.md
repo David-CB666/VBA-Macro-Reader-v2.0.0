@@ -9,6 +9,10 @@
 
 > **Read, modify, and execute VBA macros from `.xlsm`/`.xlam` files — with or without Excel.**
 
+<p align="center">
+  <img src="demo/demo_preview.png" alt="VBA Macro Reader Architecture" width="800">
+</p>
+
 ---
 
 ## 🎯 What It Does
