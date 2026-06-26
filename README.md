@@ -1,195 +1,161 @@
-# VBA Macro Reader & Operator Skill
+<p align="center">
+  <img src="https://img.shields.io/badge/Python-3.8%2B-blue?logo=python" alt="Python">
+  <img src="https://img.shields.io/badge/License-MIT-yellow" alt="License">
+  <img src="https://img.shields.io/badge/platform-Windows-lightgrey" alt="Platform">
+  <img src="https://img.shields.io/badge/mode-read%20%7C%20write%20%7C%20execute-green" alt="Mode">
+</p>
 
-> 版本：v2.0.0
-> 最後更新：2026-06-03
-> 作者：[姓名]
+# VBA Macro Reader & Operator
 
----
-
-## 📋 功能概述
-
-完整的 VBA 宏代碼讀取、修改、**執行**解決方案：
-
-| 功能 | 描述 |
-|:---|:---|
-| **讀取 VBA 代碼** | 從 .xlsm/.xlam 提取所有模塊代碼 |
-| **解析模塊結構** | 識別 Sub/Function、參數、變量 |
-| **實時修改** | 通過 win32com 動態修改宏代碼 |
-| **★執行宏代碼** | **直接運行宏，生成文件和結果** |
-| **★監控執行** | **超時控制、日誌記錄、錯誤捕獲** |
-| **★結果處理** | **獲取生成的文件列表** |
+> **Read, modify, and execute VBA macros from `.xlsm`/`.xlam` files — with or without Excel.**
 
 ---
 
-## 🔧 安裝
+## 🎯 What It Does
 
-### 依賴項
+Extract, analyze, edit, and **run** VBA macro code inside Excel macro-enabled workbooks. Two modes:
+
+| Mode | Needs Excel? | Read | Write | Execute |
+|------|:---:|:---:|:---:|:---:|
+| **oletools** | ❌ No | ✅ | ❌ | ❌ |
+| **win32com** | ✅ Yes | ✅ | ✅ | ✅ |
+
+---
+
+## 🚀 Quick Start
 
 ```bash
-pip install pywin32 oletools
+git clone https://github.com/David-CB666/VBA-Macro-Reader-v2.0.0.git
+cd VBA-Macro-Reader-v2.0.0
+pip install -r requirements.txt
 ```
 
----
-
-## 📋 使用方法
-
-### 1. 讀取 VBA 代碼
+### Read Macros (no Excel needed)
 
 ```python
 from scripts.vba_reader import VBAReader
 
-reader = VBAReader("file.xlsm")
-modules = reader.get_all_modules()
+with VBAReader("workbook.xlsm", use_win32com=False) as reader:
+    # List all modules
+    for name in reader.list_modules():
+        print(f"=== {name} ===")
+        print(reader.get_module(name))
 
-for name, code in modules.items():
-    print(f"=== {name} ===")
-    print(code)
+    # Find all procedures
+    for proc in reader.list_procedures():
+        print(f"{proc['type']} {proc['name']} in {proc['module']}")
+
+    # Analyze code structure
+    analysis = reader.analyze_code("Module1")
+    print(f"Lines: {analysis['line_count']}")
 ```
 
----
-
-### 2. 執行宏代碼
+### Execute Macros (with Excel)
 
 ```python
-reader = VBAReader("file.xlsm", use_win32com=True)
-
-# 執行宏
-result = reader.run_macro("FillExcelTemplate")
-
-print(f"狀態: {result['status']}")
-print(f"耗時: {result['duration']} 秒")
-
-# 獲取生成的文件
-files = reader.get_generated_files()
+with VBAReader("workbook.xlsm", use_win32com=True) as reader:
+    # Run a macro
+    result = reader.run_macro("FillTemplate", 
+                               filePath="data.xlsx",
+                               dataRange="A1:D100")
+    print(f"Done: {result}")
+    
+    # Run with error monitoring
+    result = reader.run_macro_monitored("ProcessData", timeout=30)
+    if result['success']:
+        print(result['output_files'])
+    else:
+        print(f"Error: {result['error']}")
+    
+    # Batch execute macros
+    reader.run_macros_batch(["Macro1", "Macro2", "Macro3"])
 ```
 
 ---
 
-### 3. 智能執行
+## 📁 Project Structure
 
-```python
-result = reader.smart_run(
-    macro_name="FillExcelTemplate",
-    auto_save=True,
-    auto_backup=True,
-    timeout_seconds=300,
-    retry_on_error=True,
-    max_retries=3,
-)
+```
+VBA-Macro-Reader-v2.0.0/
+├── scripts/
+│   └── vba_reader.py    # Core library (VBAReader class)
+├── examples/
+│   ├── read_vba.py       # Read-only examples
+│   └── run_macro.py      # Execution examples
+├── tests/
+│   └── test_reader.py    # Pytest suite (7 CI tests)
+├── CHANGELOG.md
+└── CONTRIBUTING.md
 ```
 
 ---
 
-### 4. 命令行使用
+## 🔧 Key Features
+
+- ✅ **Read** — extract all modules + code from `.xlsm/.xlam` files
+- ✅ **Analyze** — list procedures, extract parameters, count lines
+- ✅ **Modify** — update module code via win32com
+- ✅ **Execute** — run macros with parameters, capture results
+- ✅ **Monitor** — timeout control, error capture, execution logs
+- ✅ **Batch** — chain multiple macros in sequence
+- ✅ **Cross-platform read** — oletools mode works on macOS/Linux
+- ✅ **CI-tested** — 7 unit tests run on every push
+
+---
+
+## 📖 Examples
+
+### Scenario 1: Audit a macro workbook
 
 ```bash
-# 列出模塊
-python scripts/vba_reader.py file.xlsm --list
-
-# 列出過程
-python scripts/vba_reader.py file.xlsm --procs
-
-# 執行宏
-python scripts/vba_reader.py file.xlsm --run FillExcelTemplate
+python examples/read_vba.py --file "workbook.xlsm"
 ```
+Output: module names, procedure signatures, line counts.
 
----
-
-## 📋 核心 API
+### Scenario 2: Automate template filling
 
 ```python
-class VBAReader:
-    # 讀取功能
-    def get_all_modules(self) -> Dict[str, str]
-    def get_module(self, module_name: str) -> str
-    def list_modules(self) -> List[str]
-    def list_procedures(self) -> List[Dict]
+from scripts.vba_reader import VBAReader
 
-    # 修改功能
-    def update_module(self, module_name: str, code: str) -> bool
-    def add_module(self, module_name: str, code: str) -> bool
-    def delete_module(self, module_name: str) -> bool
+with VBAReader("template_macros.xlsm", use_win32com=True) as reader:
+    # Find the template-filling macro
+    macros = reader.list_procedures()
+    filler = next(m for m in macros if "Fill" in m["name"])
+    print(f"Found: {filler['name']}({filler['params']})")
+    
+    # Execute it
+    reader.run_macro(filler['name'], dataRange="Sheet1!A1:Z100")
+```
 
-    # ★執行功能（核心）
-    def run_macro(self, macro_name: str) -> Dict
-    def run_macro_with_params(self, macro_name: str, params: List) -> Dict
-    def run_macro_monitored(self, macro_name: str, timeout_seconds: int = 300) -> Dict
-    def run_macros_batch(self, macros: List[Tuple[str, List]]) -> List[Dict]
-    def smart_run(self, macro_name: str, **kwargs) -> Dict
-    def get_generated_files(self) -> List[str]
+### Scenario 3: CI pipeline integration
+
+```python
+# oletools mode — no Excel, runs in GitHub Actions
+reader = VBAReader("workbook.xlsm", use_win32com=False)
+assert len(reader.list_modules()) > 0, "No modules found"
 ```
 
 ---
 
-## 📋 技術方案
+## ⚙️ Requirements
 
-### win32com 模式（推薦）
-
-- ✅ 可讀取和修改 VBA 代碼
-- ✅ 可實時執行宏
-- ✅ 支持 Excel 所有功能
-- ⚠️ 需要安裝 Excel
-- ⚠️ Windows only
-
-### oletools 模式
-
-- ✅ 不需要 Excel
-- ✅ 跨平台
-- ❌ 只能讀取，不能修改
+| Dependency | Required For | Install |
+|------------|-------------|---------|
+| `oletools` | Read mode (always) | `pip install oletools` |
+| `pywin32` | Write/Execute mode | `pip install pywin32` |
+| Microsoft Excel | Write/Execute mode | Windows only |
 
 ---
 
-## 📋 已知限制
+## 🧪 Tests
 
-| 限制 | 說明 | 解決方案 |
-|:---|:---|:---|
-| 需要 Excel | win32com 需要安裝 Excel | 使用 oletools 只讀模式 |
-| Windows only | win32com 僅支持 Windows | 使用 oletools 跨平台 |
-| 密碼保護 | 密碼保護的 VBA 無法讀取 | 需要密碼才能解鎖 |
-
----
-
-## 📋 文件結構
-
-```
-vba-reader/
-├── SKILL.md              # 技能文檔（10.3 KB）
-├── README.md             # 本文件
-├── scripts/
-│   └── vba_reader.py     # 核心模塊（23 KB）
-├── examples/
-│   ├── read_vba.py       # 讀取示例（5.1 KB）
-│   └── run_macro.py      # 執行示例（5.8 KB）
-└── tests/
-    └── test_reader.py    # 測試文件（2.9 KB）
+```bash
+pytest tests/test_reader.py -v
+# 7 unit tests (CI-safe) + 5 integration tests (local only, auto-skip)
 ```
 
 ---
 
-## 📋 許可證
+## 📄 License
 
-MIT License
-
----
-
-## 📋 更新日誌
-
-### v2.0.0 (2026-06-03)
-
-- ✨ 新增執行宏功能（核心功能）
-- ✨ 新增監控執行功能
-- ✨ 新增結果處理功能
-- ✨ 新增智能執行功能
-- ✨ 新增批量執行功能
-- 🔒 完成脫敏處理
-
-### v1.0.0 (2026-06-03)
-
-- ✅ 初始版本
-- ✅ 讀取 VBA 代碼功能
-- ✅ 解析模塊結構
-- ✅ 實時修改功能
-
----
-
-**VBA Macro Reader v2.0.0 - 讀取、修改、執行 VBA 宏代碼！** 🎉
+MIT © [David-CB666](https://github.com/David-CB666)
