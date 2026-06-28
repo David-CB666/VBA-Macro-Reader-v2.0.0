@@ -9,6 +9,8 @@
 
 > **Read, modify, and execute VBA macros from `.xlsm`/`.xlam` files — with or without Excel.**
 
+Dual-mode VBA toolkit: use lightweight oletools for cross-platform read/audit (no Excel needed), or win32com for full read/write/execute with live Excel automation. Extract module code, analyze procedures, modify macros, execute with timeout & error monitoring, and chain batch runs — all from Python.
+
 <p align="center">
   <img src="demo/demo_preview.png" alt="VBA Macro Reader Architecture" width="800">
 </p>
@@ -157,6 +159,28 @@ assert len(reader.list_modules()) > 0, "No modules found"
 pytest tests/test_reader.py -v
 # 7 unit tests (CI-safe) + 5 integration tests (local only, auto-skip)
 ```
+
+---
+
+## 📊 Real-World Impact
+
+> *"想知個 xlsm 入面有咩宏，以前要開 Excel 禁 Alt+F11 慢慢睇。而家一條 python command 全部模塊同 procedure 列晒出黎。仲可以 remote 機冇裝 Office 都 audit 到 VBA 代碼。"* — Mike, MEP Project Manager
+
+---
+
+## 🇭🇰 中文簡介
+
+雙模式 VBA 宏讀取/修改/執行工具。oletools 模式唔洗裝 Excel 都讀到宏代碼（跨平台），win32com 模式可以完整讀寫同執行宏。支援代碼分析、參數提取、Timeout 監控、批量執行。
+
+---
+
+## 🔗 My Other Tools
+
+| Tool | Description |
+|------|-------------|
+| [**Excel Template Filler**](https://github.com/David-CB666/excel-template-filler) | Dual-engine batch template filling — images & print settings preserved |
+| [**GanttChart Pro**](https://github.com/David-CB666/gantt-chart-pro) | Professional Gantt charts in Excel — no MS Project |
+| [**Material Submittal Generator**](https://github.com/David-CB666/material-submittal-generator) | One-click batch submittals + auto BQ page merging |
 
 ---
 
