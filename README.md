@@ -7,7 +7,7 @@
 Dual-mode VBA toolkit: use lightweight oletools for cross-platform read/audit (no Excel needed), or win32com for full read/write/execute with live Excel automation. Extract module code, analyze procedures, modify macros, execute with timeout & error monitoring, and chain batch runs — all from Python.
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
-[![Python](https://img.shields.io/badge/Python-3.8+-3776AB?logo=python&logoColor=white)](https://python.org)
+[![Python](https://img.shields.io/badge/Python-3.10+-3776AB?logo=python&logoColor=white)](https://python.org)
 [![oletools](https://img.shields.io/badge/oletools-0.2+-3776AB?logo=python&logoColor=white)](https://pypi.org/project/oletools/)
 [![Tests](https://img.shields.io/badge/tests-7%20passing-brightgreen)](https://github.com/David-CB666/VBA-Macro-Reader-v2.0.0/tree/main/tests)
 [![Stars](https://img.shields.io/github/stars/David-CB666/VBA-Macro-Reader-v2.0.0?style=social)](https://github.com/David-CB666/VBA-Macro-Reader-v2.0.0/stargazers)
@@ -19,6 +19,12 @@ Dual-mode VBA toolkit: use lightweight oletools for cross-platform read/audit (n
 </div>
 
 ---
+
+## 📸 Demo
+
+![VBA Macro Reader Demo](demo/demo_preview.png)
+
+*Extract and analyze VBA macros without opening Excel*
 
 ## 🎯 What It Does
 
