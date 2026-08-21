@@ -83,13 +83,17 @@ with VBAReader("workbook.xlsm", use_win32com=True) as reader:
 
 ```
 VBA-Macro-Reader-v2.0.0/
+├── SKILL.md              # Skill doc (Clawd skill-market ready)
 ├── scripts/
-│   └── vba_reader.py    # Core library (VBAReader class)
+│   ├── vba_reader.py     # Core library (VBAReader class)
+│   └── excel_screenshot.py  # Excel → PNG screenshot helper
 ├── examples/
 │   ├── read_vba.py       # Read-only examples
 │   └── run_macro.py      # Execution examples
 ├── tests/
 │   └── test_reader.py    # Pytest suite (7 CI tests)
+├── demo/
+│   └── demo_preview.png  # Architecture preview
 ├── CHANGELOG.md
 └── CONTRIBUTING.md
 ```
