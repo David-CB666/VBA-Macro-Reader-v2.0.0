@@ -168,7 +168,7 @@ pytest tests/test_reader.py -v
 
 ## 📊 Real-World Impact
 
-> *"想知個 xlsm 入面有咩宏，以前要開 Excel 禁 Alt+F11 慢慢睇。而家一條 python command 全部模塊同 procedure 列晒出黎。仲可以 remote 機冇裝 Office 都 audit 到 VBA 代碼。"* — Mike, MEP Project Manager
+> *"想知個 xlsm 入面有咩宏，以前要開 Excel 禁 Alt+F11 慢慢睇。而家一條 python command 全部模塊同 procedure 列晒出黎。仲可以 remote 機冇裝 Office 都 audit 到 VBA 代碼。"* — David-CB666, MEP Project Manager
 
 ---
 
