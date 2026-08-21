@@ -22,9 +22,9 @@ Dual-mode VBA toolkit: use lightweight oletools for cross-platform read/audit (n
 
 ## 📸 Demo
 
-![VBA Macro Reader Demo](demo/demo_preview.png)
+![VBA Macro Reader Workflow](demo/vba_reader_demo.jpg)
 
-*Extract and analyze VBA macros without opening Excel*
+*Dual-mode workflow: .xlsm file → oletools (no Excel needed, read & audit) OR win32com (full read/write/execute) → code analysis output*
 
 ## 🎯 What It Does
 
