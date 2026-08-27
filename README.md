@@ -181,6 +181,37 @@ pytest tests/test_reader.py -v
 - CI 友好 — 7 个单元测试无需 Excel 即可运行
 - 批量执行 — 支持宏链式调用和超时监控
 
+## 📖 Complete Guide
+
+This tool is the **`vba-reader` skill pack** from the **AI Agent Cultivation Field Manual v2.0** — a 13-chapter + 8-appendix handbook that teaches you how to train a generic AI into your domain engineering expert.
+
+**The manual covers 4 software domains with real efficiency data:**
+
+| Software | Chapter | Before → After |
+|----------|---------|----------------|
+| Word | Ch.6 | 2-3 days → 30 min |
+| Excel | Ch.7 | 14 hrs → 30 min (28x faster) |
+| PDF | Ch.8 | 200 pages 16.7 hrs → 40 min |
+| CAD | Ch.9 | 30 min/sheet → minutes/set |
+
+**This tool = Skill Pack #7 (`vba-reader`) in the manual.** The full version includes 6 more skill packs:
+
+| # | Skill Pack | Purpose |
+|---|-----------|---------|
+| 1 | material-approval | Batch submittal sheet generation |
+| 2 | material-approval-workflow | Full submittal pipeline + BQ merge |
+| 3 | dem-material-approval | DEM-specific submittal |
+| 4 | commissioning-manual-generator | Auto-generate Word commissioning manuals |
+| 5 | daily-report-generator | Construction daily reports |
+| 6 | tender-intel-extractor | Extract data from tender PDFs |
+| **7** | **vba-reader** ← this one | Read/modify/execute VBA macros |
+
+👉 **[Get the full manual + all 7 skill packs →](https://david-cb666.github.io/ai-agent-manual)**
+
+> Free preview: Chapter 1 (5-min AI level self-assessment) available on the landing page.
+
+---
+
 ## 🔗 My Other Tools
 
 | Tool | Description |
