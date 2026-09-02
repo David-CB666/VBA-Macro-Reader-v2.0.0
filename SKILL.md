@@ -346,8 +346,8 @@ for module in reader.list_modules():
 import os
 
 files = [
-    r"D:\Projects\ProjectA\報批表.xlsm",
-    r"D:\Projects\ProjectB\報批表.xlsm",
+    r"<PROJECTS_ROOT>\ProjectA\報批表.xlsm",
+    r"<PROJECTS_ROOT>\ProjectB\報批表.xlsm",
 ]
 
 new_code = """
